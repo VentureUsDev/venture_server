@@ -2,16 +2,20 @@
 
 const mongoose     = require('mongoose')
 const schemaOption = require('../../libs/schema_option')
+const Location     = require('./location.schema')
 
 const VentureSchema = {
   // may not need an initiator - what previlages would be needed?
-  initiator:    {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true},
-  participants: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-  name:         {type: String, required: true, maxlength: 32},
-  // will need a cron job to complete venture (based on date)
-  date:         {type: Date}, // not required, if no date, for now
+  // initiator:    {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true},
+  group:        {type: mongoose.Schema.Types.ObjectId, ref: 'Group'},
+  members:      [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+  name:         {type: String, required: true, minLength: 2, maxlength: 32},
+  // TODO: cron job to complete venture (based on date)
+  date:         {type: Date}, // not required, if no date, now = createdAt
   options:      [{type: mongoose.Schema.Types.ObjectId, ref: 'Venue'}],
-  venue:        {type: mongoose.Schema.Types.ObjectId, ref: 'Venue', required: true},
+  venue:        {type: mongoose.Schema.Types.ObjectId, ref: 'Venue'},
+  location:     Location,
+  radius:       {type: Number, default: 5},
   // will be able to add review when complete
   complete:     {type: Boolean, default: false},
 }
