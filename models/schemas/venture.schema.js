@@ -9,7 +9,7 @@ const VentureSchema = {
   // initiator:    {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true},
   group:        {type: mongoose.Schema.Types.ObjectId, ref: 'Group'},
   members:      [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-  name:         {type: String, required: true, minLength: 2, maxlength: 32},
+  category:     {type: Number, default: 0, max: 64}, // 0 - food, 1 - drinks
   // TODO: cron job to complete venture (based on date)
   date:         {type: Date}, // not required, if no date, now = createdAt
   options:      [{type: mongoose.Schema.Types.ObjectId, ref: 'Venue'}],
