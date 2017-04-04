@@ -5,28 +5,28 @@ const { validate }  = require('../libs/helpers')
 const worker        = require('../worker')
 
 function create(req, res, next) {
-  const { email } = req.body
+  const { phone } = req.body
 
-  User.findByEmail(email)
+  User.findByPhone(phone)
 
     .then(user => {
       // if a verified user exist, throw error
       if (user && user.verified) {throw new Error('User already exists')}
       // if no user, create new
       if (!user) {
-        validate(email, 'email')
-        user = new User({ email })
+        validate(phone, 'phone')
+        user = new User({ phone })
       }
       // generate new user.code
       return user.generateOTP()
     })
 
     .then(user => {
-      req.data = {prompt: 'Check email for verification code'}
+      req.data = {prompt: 'Verification code sent to user'}
       next()
-      // run a background job to send email with code
-      worker.now('email_verification', {
-        email: user.email,
+      // run a background job to send text with code
+      worker.now('text_verification', {
+        phone: user.phone,
         code: user.code,
       })
     })
@@ -43,7 +43,7 @@ function update(req, res, next) {
 
     .then(user => {
       const response = user ? {token: signToken(user, 30)} : `Verification code sent to user`
-      req.data = req.data ? Object.assign({}, req.data, response) : response
+      req.data = Object.assign({}, req.data, response)
       return next()
     })
 

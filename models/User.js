@@ -7,7 +7,7 @@ mongoose.Promise = global.Promise
 
 User.methods.generateOTP = function() {
   // TODO: make this short-lived - expire it
-  this.code = crypto.randomBytes(6).toString('hex')
+  this.code = crypto.randomBytes(3).toString('hex')
   return this.save()
 }
 
@@ -59,11 +59,11 @@ User.methods.updateFields = function(updates) {
   return this.save()
 }
 
-User.statics.findByEmail = function(email) {
-  if (email instanceof Array) {
-    return this.find({email: {$in: email}}).exec()
+User.statics.findByPhone = function(phone) {
+  if (phone instanceof Array) {
+    return this.find({phone: {$in: phone}}).exec()
   } else {
-    return this.findOne({ email }).exec()
+    return this.findOne({ phone }).exec()
   }
 }
 
