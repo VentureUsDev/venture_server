@@ -8,7 +8,7 @@ const {
 }                = require('../../config')
 
 /*configure transporter*/
-const transporter = nodemailer.createTransport(`smtps://${mailer}%40gmail.com:${mailerPw}@smtp.gmail.com`)
+const transporter = nodemailer.createTransport(`smtps://${mailer}:${mailerPw}@smtp.gmail.com`)
 
 module.exports = (agenda) => {
   /*
@@ -37,7 +37,7 @@ module.exports = (agenda) => {
 
 function sendEmail(email, code) {
   const mailOptions = {
-    from: `${appName} <${mailer}@gmail.com>`,
+    from: `${appName} <${mailer}>`,
     to: email,
     subject: `Please verify your email`,
     text: 'Please click the link to verify your email',
