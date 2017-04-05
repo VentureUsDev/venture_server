@@ -3,7 +3,8 @@ const nodemailer = require('nodemailer')
 const {
   mailer,
   mailerPw,
-  appName
+  appName,
+  CLIENT_URL
 }                = require('../../config')
 
 /*configure transporter*/
@@ -40,7 +41,7 @@ function sendEmail(email, code) {
     to: email,
     subject: `Please verify your email`,
     text: 'Please click the link to verify your email',
-    html: `<b>Please click <a href="${process.env.CLIENT_URL}/verify/${code}">here</a> to verify your email.</b>`
+    html: `<b>Please click <a href="${CLIENT_URL}/verify/${code}">here</a> to verify your email.</b>`
   }
 
   return transporter.sendMail(mailOptions)

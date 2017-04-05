@@ -1,4 +1,5 @@
 'use strict'
+require('dotenv').config()
 
 const environment = process.env.NODE_ENV
 const port        = process.env.PORT || 8080
@@ -6,6 +7,8 @@ const appName     = process.env.APP_NAME || 'node_server'
 const jobs        = process.env.JOB_TYPES
 const mailer      = process.env.GMAIL
 const mailerPw    = process.env.GMAIL_PW
+const JWT_SECRET  = process.env.JWT_SECRET
+const CLIENT_URL  = process.env.CLIENT_URL
 
 let log, db
 
@@ -23,4 +26,15 @@ switch(environment) {
     db = `mongodb://localhost/${appName}`
 }
 
-module.exports = { db, log, port, appName, environment, jobs, mailer, mailerPw }
+module.exports = {
+  db,
+  log,
+  port,
+  appName,
+  environment,
+  jobs,
+  mailer,
+  mailerPw,
+  JWT_SECRET,
+  CLIENT_URL,
+}
