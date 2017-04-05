@@ -1,7 +1,10 @@
 {
   "name": "node_server",
   "version": "1.0.0",
-  "description": "node server template",
+  "description": "venture-server-api",
+  "engines": {
+    "node": "7.7.0"
+  },
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
