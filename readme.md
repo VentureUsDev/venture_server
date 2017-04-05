@@ -1,14 +1,21 @@
-# Node Server Boilerplate
+# API Server for Venture
 
-This is a boilerplate for a node server using `express` & `mongoose`
+### Environments
 
-### Dependencies
-`express` `mongoose` `body-parser` `cors` `morgan`
+|local| `http://localhost:8080/api`|
+|-----|-----|
+|development| `https://venture-sever-api.herokuapp.com/api/`|
 
-
-### Start
+### Installation
 
 ```
 npm install
 ```
 
+### Start
+
+```
+npm start
+npm run dev
+npm run debug
+```
