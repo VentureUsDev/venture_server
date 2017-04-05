@@ -2,6 +2,7 @@
 const { User }      = require('../models')
 const { signToken } = require('../libs/authentication')
 const { validate }  = require('../libs/helpers')
+const updateProps   = require('../libs/update_helper')
 const worker        = require('../worker')
 
 function create(req, res, next) {
@@ -11,7 +12,7 @@ function create(req, res, next) {
 
     .then(user => {
       // if a verified user exist, throw error
-      if (user && user.verified) {throw new Error('User already exists')}
+      if (user && user.verified) throw new Error('User already exists')
       // if no user, create new
       if (!user) {
         validate(phone, 'phone')
@@ -39,7 +40,7 @@ function update(req, res, next) {
 
   User.findById(_id).exec()
 
-    .then(user => user.updateFields(req.body))
+    .then(user => updateProps.call(user, req.body))
 
     .then(user => {
       const response = user ? {token: signToken(user, 30)} : `Verification code sent to user`
