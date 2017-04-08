@@ -88,17 +88,17 @@ function authenticate(req, res, next) {
 }
 
 function forgot(req, res, next) {
-  const { email } = req.query
-
-  User.findByEmail(email)
+  const { phone } = req.query
+  if (!phone) throw new Error('Phone is required')
+  User.findByEmail(phone)
     .then(user => user.generateOTP())
 
     .then(user => {
-      worker.now('reset_password', {
-        email: user.email,
+      worker.now('send_verification', {
+        phone: user.phone,
         code: user.code,
       })
-      req.data = `Verification code sent to ${user.email}`
+      req.data = `Verification code sent to ${user.phone}`
       return next()
     })
 
