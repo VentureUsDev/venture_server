@@ -1,18 +1,18 @@
 # API Server for Venture
 
-### Environments
+## Environments
 
 |local| `http://localhost:8080/api`|
 |-----|-----|
 |development| `https://venture-sever-api.herokuapp.com/api/`|
 
-### Installation
+## Installation
 
 ```
 npm install
 ```
 
-### Start
+## Start
 
 ```
 npm start
@@ -20,9 +20,9 @@ npm run dev
 npm run debug
 ```
 
-### API Endpoints
+## API Endpoints
 
-#### Signup ####
+### Signup
 
 `POST` `/user`
 * if success, user will get a `code` via text
@@ -32,18 +32,18 @@ npm run debug
 |`phone`|true|String|`+10000000000`|must satisfy regex `/\+[0-9]{0,14}$/`|
 
 `POST` `/verify`
-* if success, user will get a `token` to set password
+* if success, user will get a `token` for use as `x-access-token` header in subsequent calls
 
 |Body|Required|Type|Example|Notes|
 |-----|-----|-----|-----|-----|
 |`phone`|true|String|`+10000000000`|must satisfy regex `/\+[0-9]{0,14}$/`|
 |`code`|true|String|`ab1234`|should have received from text|
 
-#### User ####
+### User
 
 `PUT` `/user`
-* can be part of signup (to set password, etc)
-* or in updating user profile subsequently
+* can be used @ signup (to set password, names, etc)
+* or in updating user profile later
 
 |Body|Required|Type|Example|Notes|
 |-----|-----|-----|-----|-----|
