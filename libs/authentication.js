@@ -33,6 +33,9 @@ function checkToken(req, res, next) {
 }
 
 function signToken(user, expiresIn = null) {
+  const { phone, verified, firstName, lastName } = user
+  user = Object.assign({}, { phone, verified, firstName, lastName })
+
   if(expiresIn) {
     expiresIn = 3600 * expiresIn
     return jwt.sign(user, JWT_SECRET, { expiresIn })
@@ -41,11 +44,11 @@ function signToken(user, expiresIn = null) {
 }
 
 function verify(req, res, next) {
-  const { code, email } = req.body
+  const { code, phone } = req.body
 
-  User.findByEmail(email)
+  User.findByPhone(phone)
     .then(user => {
-      if (!user) {throw new Error('Wrong email')}
+      if (!user) {throw new Error('Wrong phone')}
 
       if (user.code != code) {throw new Error('Invalid verification code')}
 

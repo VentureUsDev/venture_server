@@ -1,4 +1,5 @@
 'use strict'
+
 const { User }      = require('../models')
 const { signToken } = require('../libs/authentication')
 const { validate }  = require('../libs/helpers')
@@ -26,7 +27,7 @@ function create(req, res, next) {
       req.data = {prompt: 'Verification code sent to user'}
       next()
       // run a background job to send text with code
-      worker.now('text_verification', {
+      worker.now('send_verification', {
         phone: user.phone,
         code: user.code,
       })

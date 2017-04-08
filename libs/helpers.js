@@ -2,7 +2,6 @@
 
 function validate(string, type) {
   let regex
-
   switch(type) {
 
   case 'phone':

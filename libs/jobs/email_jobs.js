@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer')
 const {
   mailer,
   mailerPw,
-  appName,
+  APPNAME,
   CLIENT_URL
 }                = require('../../config')
 
@@ -37,7 +37,7 @@ module.exports = (agenda) => {
 
 function sendEmail(email, code) {
   const mailOptions = {
-    from: `${appName} <${mailer}>`,
+    from: `${APPNAME} <${mailer}>`,
     to: email,
     subject: `Please verify your email`,
     text: 'Please click the link to verify your email',
