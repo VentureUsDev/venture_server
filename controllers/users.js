@@ -8,7 +8,7 @@ const worker        = require('../worker')
 
 function create(req, res, next) {
   const { phone } = req.body
-
+  if (!phone) throw new Error('Phone is required')
   User.findByPhone(phone)
 
     .then(user => {

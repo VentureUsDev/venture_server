@@ -45,12 +45,13 @@ function signToken(user, expiresIn = null) {
 
 function verify(req, res, next) {
   const { code, phone } = req.body
+  if(!code || !phone) throw new Error('Phone & code required')
 
   User.findByPhone(phone)
     .then(user => {
-      if (!user) {throw new Error('Wrong phone')}
+      if (!user) throw new Error('Wrong phone')
 
-      if (user.code != code) {throw new Error('Invalid verification code')}
+      if (user.code != code) throw new Error('Invalid verification code')
 
       user.verified = true
       user.code = null
