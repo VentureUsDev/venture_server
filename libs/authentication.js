@@ -67,9 +67,9 @@ function verify(req, res, next) {
 }
 
 function authenticate(req, res, next) {
-  const { email, password } = req.body
-
-  User.findByEmail(email)
+  const { phone, password } = req.body
+  if (!phone || !password) throw new Error('Phone & password required')
+  User.findByPhone(phone)
     .then(user => {
 
       if (!user || !user.verified) {

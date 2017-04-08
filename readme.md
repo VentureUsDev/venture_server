@@ -22,16 +22,26 @@ npm run debug
 
 ## API Endpoints
 
+### Authenticate
+
+#### `POST` `/authenticate`
+* if success, user will get a `token` for use as `x-access-token` header in subsequent calls
+
+|Body|Required|Type|Example|Notes|
+|-----|-----|-----|-----|-----|
+|`phone`|true|String|`+10000000000`|must satisfy regex `/\+[0-9]{0,14}$/`|
+|`password`|true|String|`password`||
+
 ### Signup
 
-`POST` `/user`
+#### `POST` `/user`
 * if success, user will get a `code` via text
 
 |Body|Required|Type|Example|Notes|
 |-----|-----|-----|-----|-----|
 |`phone`|true|String|`+10000000000`|must satisfy regex `/\+[0-9]{0,14}$/`|
 
-`POST` `/verify`
+#### `POST` `/verify`
 * if success, user will get a `token` for use as `x-access-token` header in subsequent calls
 
 |Body|Required|Type|Example|Notes|
@@ -41,7 +51,7 @@ npm run debug
 
 ### User
 
-`PUT` `/user`
+#### `PUT` `/user`
 * can be used @ signup (to set password, names, etc)
 * or in updating user profile later
 
@@ -49,8 +59,8 @@ npm run debug
 |-----|-----|-----|-----|-----|
 |`password`||String|`password`||
 |`email`||String|`email@email.com`||
-|`firstName`||String|`ab1234`||
-|`lastName`||String|`ab1234`||
+|`firstName`||String|`John`||
+|`lastName`||String|`Hwang`||
 |`noticeOff`||Boolean|`true`|notification setting|
 |`emailOff`||Boolean|`true`|email setting|
 
