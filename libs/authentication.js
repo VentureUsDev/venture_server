@@ -25,7 +25,7 @@ function checkToken(req, res, next) {
 
       jwt.verify(token, JWT_SECRET, (err, decoded) => {
         if (err) return next(new Error('Invalid token'))
-        req.user = decoded._doc
+        req.user = decoded
         return next()
       })
   }
@@ -33,8 +33,8 @@ function checkToken(req, res, next) {
 }
 
 function signToken(user, expiresIn = null) {
-  const { phone, verified, firstName, lastName } = user
-  user = Object.assign({}, { phone, verified, firstName, lastName })
+  const { _id, phone, verified, firstName, lastName } = user
+  user = Object.assign({}, { _id, phone, verified, firstName, lastName })
 
   if(expiresIn) {
     expiresIn = 3600 * expiresIn

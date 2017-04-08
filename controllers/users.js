@@ -38,13 +38,12 @@ function create(req, res, next) {
 
 function update(req, res, next) {
   const { _id } = req.user
-
   User.findById(_id).exec()
 
     .then(user => updateProps.call(user, req.body))
 
     .then(user => {
-      const response = user ? {token: signToken(user, 30)} : `Verification code sent to user`
+      const response = user ? {user: user.toObject()} : `Verification code sent to user`
       req.data = Object.assign({}, req.data, response)
       return next()
     })

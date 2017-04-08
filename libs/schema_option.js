@@ -37,6 +37,7 @@ module.exports = (...args) => {
         transform: function(doc, ret, options) {
           delete ret.code
           delete ret.password
+          delete ret.__v
         }
       }
       break
