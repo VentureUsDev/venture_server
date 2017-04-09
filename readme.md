@@ -49,9 +49,9 @@ npm run debug
 |`phone`|true|String|`+10000000000`|must satisfy regex `/\+[0-9]{0,14}$/`|
 |`code`|true|String|`ab1234`|should have received from text|
 
-### User
+### User 
 
-#### `PUT` `/user`
+#### `PUT` `/user` `x-access-token` header required
 * can be used @ signup (to set password, names, etc)
 * or in updating user profile later
 
@@ -64,4 +64,13 @@ npm run debug
 |`noticeOff`||Boolean|`true`|notification setting|
 |`emailOff`||Boolean|`true`|email setting|
 
+### Friend
 
+#### `POST` `/friend` `x-access-token` header required
+* will check if the friend is a user
+* if not user, will invite friend to be a user via text
+* cannot handle batch request (no multiple friend additions for now)
+
+|Body|Required|Type|Example|Notes|
+|-----|-----|-----|-----|-----|
+|`phone`|true|String|`+10000000000`|must satisfy regex `/\+[0-9]{0,14}$/`|
