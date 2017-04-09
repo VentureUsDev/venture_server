@@ -6,7 +6,7 @@ module.exports = (agenda) => {
 
   agenda.define('send_verification', (job, done) => {
     const config = job.attrs.data
-    config.message = `Your verification code for ${APPNAME}: `
+    config.message = configureMessage(config.type)
 
     sendText(config)
       .then(data => {
@@ -20,5 +20,18 @@ module.exports = (agenda) => {
         done(err.message)
       })
   })
+
+}
+
+function configureMessage(type) {
+  switch (type) {
+
+    case 'befriend':
+      return `Your friend has invited you to ${APPNAME}. Use this code to signup: `
+
+    case 'signup':
+    default:
+      return `Your verification code for ${APPNAME}: `
+  }
 
 }

@@ -12,24 +12,36 @@ function create(req, res, next) {
   User.findByPhone(phone)
 
     .then(user => {
-      // if a verified user exist, throw error
-      if (user && user.verified) throw new Error('User already exists')
+
+      // if a verified user exist,
+      if (user && user.verified) {
+        // a. throw error if coming from signup
+        if (req.url != '/friend') throw new Error('User already exists')
+        // b. go to next if coming from friend (param.friend) attach user id to req
+        req.body.user = user._id
+        next()
+      }
+
       // if no user, create new
       if (!user) {
         validate(phone, 'phone')
         user = new User({ phone })
       }
+
       // generate new user.code
       return user.generateOTP()
     })
 
     .then(user => {
       req.data = {prompt: 'Verification code sent to user'}
+      req.body.user = user._id
       next()
+      const type = req.url != '/friend' ? 'signup' : 'befriend'
       // run a background job to send text with code
       worker.now('send_verification', {
         phone: user.phone,
         code: user.code,
+        type,
       })
     })
 

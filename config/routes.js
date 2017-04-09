@@ -11,7 +11,7 @@ const {
   handleError
 }             = require('../libs/response')
 const users   = require('../controllers/users')
-
+const friends = require('../controllers/friends')
 
 module.exports = () => {
 
@@ -38,6 +38,8 @@ module.exports = () => {
   router.route('/user')
     .post(users.create)
     .put(users.update)
+
+  router.post('/friend', users.create, friends.create)
 
   /*
   SUCCESS & ERROR HANDLER
