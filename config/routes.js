@@ -44,6 +44,7 @@ module.exports = () => {
   router.get('/friends', friends.get)
 
   router.post('/group', groups.create)
+  router.get('/groups', groups.get)
 
   /*
   SUCCESS & ERROR HANDLER

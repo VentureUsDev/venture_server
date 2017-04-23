@@ -15,4 +15,20 @@ function create(req, res, next) {
     .catch(err => next(err))
 }
 
-module.exports = { create }
+function get(req, res, next) {
+  const user = req.user._id
+  Group.find({$or: [
+    {admin: user},
+    {members: user}
+  ]})
+    .populate('admin', 'firstName lastName phone')
+    .populate('members', 'firstName lastName phone')
+    .exec()
+    .then(groups => {
+      req.data = Object.assign({}, req.data, { groups })
+      next()
+    })
+    .catch(err => next(err))
+}
+
+module.exports = { create, get }

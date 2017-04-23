@@ -89,3 +89,5 @@ npm run debug
 |`name`|true|String|`the cool group`|name of the group, minlength is 2 chars|
 |`members`|true|Array|`['jklangdnkgmdskmgl']`|array of user ids|
 
+#### `GET` `/groups` `x-access-token` header required
+* will get all of the groups that the current user has created or is a member of
