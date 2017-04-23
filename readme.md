@@ -22,7 +22,7 @@ npm run debug
 
 ## API Endpoints
 
-### Authenticate
+### Login
 
 #### `POST` `/authenticate`
 * if success, user will get a `token` for use as `x-access-token` header in subsequent calls
@@ -31,6 +31,14 @@ npm run debug
 |-----|-----|-----|-----|-----|
 |`phone`|true|String|`+10000000000`|must satisfy regex `/\+[0-9]{0,14}$/`|
 |`password`|true|String|`password`||
+
+#### `PUT` `/forgot-password`
+* will generate a new OTP and send to user's phone
+* afterwards, `PUT/verify` to get an `x-access-token`, then `PUT/user` to update password
+
+|Body|Required|Type|Example|Notes|
+|-----|-----|-----|-----|-----|
+|`phone`|true|String|`+10000000000`|must satisfy regex `/\+[0-9]{0,14}$/`|
 
 ### Signup
 
@@ -41,7 +49,7 @@ npm run debug
 |-----|-----|-----|-----|-----|
 |`phone`|true|String|`+10000000000`|must satisfy regex `/\+[0-9]{0,14}$/`|
 
-#### `POST` `/verify`
+#### `PUT` `/verify`
 * if success, user will get a `token` for use as `x-access-token` header in subsequent calls
 
 |Body|Required|Type|Example|Notes|

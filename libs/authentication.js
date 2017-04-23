@@ -2,6 +2,7 @@
 const { User }       = require('../models')
 const jwt            = require('jsonwebtoken')
 const { JWT_SECRET } = require('../config')
+const worker         = require('../worker')
 
 function checkToken(req, res, next) {
   const url = req._parsedUrl.pathname
@@ -11,9 +12,9 @@ function checkToken(req, res, next) {
 
     // No auth check routes
     case 'GET/test':
-    case 'POST/verify':
+    case 'PUT/verify':
     case 'POST/authenticate':
-    case 'GET/forgot-password':
+    case 'PUT/forgot-password':
     case 'POST/user':
       return next()
 
@@ -88,11 +89,10 @@ function authenticate(req, res, next) {
 }
 
 function forgot(req, res, next) {
-  const { phone } = req.query
+  const { phone } = req.body
   if (!phone) throw new Error('Phone is required')
-  User.findByEmail(phone)
+  User.findByPhone(phone)
     .then(user => user.generateOTP())
-
     .then(user => {
       worker.now('send_verification', {
         phone: user.phone,
@@ -101,7 +101,6 @@ function forgot(req, res, next) {
       req.data = `Verification code sent to ${user.phone}`
       return next()
     })
-
     .catch(err => next(new Error('Problem in generating verification code')))
 }
 
