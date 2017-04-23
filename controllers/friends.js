@@ -10,9 +10,9 @@ function create(req, res, next) {
   Friend.findOne({ owner, friend }).exec()
     .then(doc => {
       if (doc) throw new Error('Already befriended')
-      let friend = { owner, friend }
-      if (nickname) friend.nickname = nickname
-      return Friend.create(friend)
+      let props = { owner, friend }
+      if (nickname) props.nickname = nickname
+      return Friend.create(props)
     })
     .then(friend => {
       req.data = Object.assign({}, req.data, { friend })
