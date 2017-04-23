@@ -78,3 +78,14 @@ npm run debug
 
 #### `GET` `/friends` `x-access-token` header required
 * will return the current user's friends list
+
+### Group
+
+#### `POST` `/group` `x-access-token` header required
+* will create a group with the current user as the admin
+
+|Body|Required|Type|Example|Notes|
+|-----|-----|-----|-----|-----|
+|`name`|true|String|`the cool group`|name of the group, minlength is 2 chars|
+|`members`|true|Array|`['jklangdnkgmdskmgl']`|array of user ids|
+

@@ -12,6 +12,7 @@ const {
 }             = require('../libs/response')
 const users   = require('../controllers/users')
 const friends = require('../controllers/friends')
+const groups  = require('../controllers/groups')
 
 module.exports = () => {
 
@@ -39,8 +40,10 @@ module.exports = () => {
     .post(users.create)
     .put(users.update)
 
-  router.get('/friends', friends.get)
   router.post('/friend', users.create, friends.create)
+  router.get('/friends', friends.get)
+
+  router.post('/group', groups.create)
 
   /*
   SUCCESS & ERROR HANDLER
