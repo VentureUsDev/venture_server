@@ -74,6 +74,7 @@ npm run debug
 |Body|Required|Type|Example|Notes|
 |-----|-----|-----|-----|-----|
 |`phone`|true|String|`+10000000000`|must satisfy regex `/\+[0-9]{0,14}$/`|
+|`nickname`|false|String|`theoldman`|minlength is 2 chars|
 
 #### `GET` `/friends` `x-access-token` header required
 * will return the current user's friends list
