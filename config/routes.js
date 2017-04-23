@@ -39,6 +39,7 @@ module.exports = () => {
     .post(users.create)
     .put(users.update)
 
+  router.get('/friends', friends.get)
   router.post('/friend', users.create, friends.create)
 
   /*
