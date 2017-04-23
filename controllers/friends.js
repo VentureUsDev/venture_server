@@ -5,11 +5,14 @@ const { Friend } = require('../models')
 function create(req, res, next) {
   const owner = req.user._id
   const friend = req.body.user
+  const { nickname } = req.body
 
   Friend.findOne({ owner, friend }).exec()
     .then(doc => {
       if (doc) throw new Error('Already befriended')
-      return Friend.create({ owner, friend })
+      let friend = { owner, friend }
+      if (nickname) friend.nickname = nickname
+      return Friend.create(friend)
     })
     .then(friend => {
       req.data = Object.assign({}, req.data, { friend })
@@ -21,7 +24,8 @@ function create(req, res, next) {
 function get(req, res, next) {
   const owner = req.user._id
   Friend.find({ owner })
-    .populate('friend', 'firstName lastName')
+    .select('friend nickname')
+    .populate('friend', 'firstName lastName phone')
     .exec()
     .then(friends => {
       req.data = Object.assign({}, req.data, { friends })
