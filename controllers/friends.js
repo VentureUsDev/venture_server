@@ -18,4 +18,16 @@ function create(req, res, next) {
     .catch(err => next(err))
 }
 
-module.exports = { create }
+function get(req, res, next) {
+  const owner = req.user._id
+  Friend.find({ owner })
+    .populate('friend', 'firstName lastName')
+    .exec()
+    .then(friends => {
+      req.data = Object.assign({}, req.data, { friends })
+      next()
+    })
+    .catch(err => next(err))
+}
+
+module.exports = { create, get }

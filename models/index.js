@@ -2,5 +2,6 @@
 
 module.exports = {
   User: require('./User'),
-  Friend: require('./Friend')
+  Friend: require('./Friend'),
+  Group: require('./Group')
 }
