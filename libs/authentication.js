@@ -13,7 +13,7 @@ function checkToken(req, res, next) {
     // No auth check routes
     case 'GET/test':
     case 'PUT/verify':
-    case 'POST/authenticate':
+    case 'PUT/authenticate':
     case 'PUT/forgot-password':
     case 'POST/user':
       return next()

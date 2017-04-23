@@ -24,7 +24,7 @@ module.exports = () => {
   /*
   AUTH ROUTES
   */
-  router.post('/authenticate', authenticate)
+  router.put('/authenticate', authenticate)
   router.put('/verify', verify)
   router.put('/forgot-password', forgot)
 

@@ -24,7 +24,7 @@ npm run debug
 
 ### Login
 
-#### `POST` `/authenticate`
+#### `PUT` `/authenticate`
 * if success, user will get a `token` for use as `x-access-token` header in subsequent calls
 
 |Body|Required|Type|Example|Notes|
