@@ -1,6 +1,8 @@
 'use strict'
 
 require('dotenv').config()
+const environment = process.env.ENVIRONMENT
+const APPNAME = process.env.APP_NAME || 'node_server'
 let log, db
 
 switch(environment) {
@@ -20,9 +22,9 @@ switch(environment) {
 module.exports = {
   db,
   log,
+  environment,
+  APPNAME,
   port: process.env.PORT || 8080,
-  APPNAME: process.env.APP_NAME || 'node_server',
-  environment: process.env.NODE_ENV,
   jobs: process.env.JOB_TYPES,
   mailer: process.env.GMAIL,
   mailerPw: process.env.GMAIL_PW,
