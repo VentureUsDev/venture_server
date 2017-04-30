@@ -9,10 +9,11 @@ const router  = express.Router()
 const {
   handleSuccess,
   handleError
-}             = require('../libs/response')
-const users   = require('../controllers/users')
-const friends = require('../controllers/friends')
-const groups  = require('../controllers/groups')
+}              = require('../libs/response')
+const users    = require('../controllers/users')
+const friends  = require('../controllers/friends')
+const groups   = require('../controllers/groups')
+const ventures = require('../controllers/ventures')
 
 module.exports = () => {
 
@@ -45,6 +46,8 @@ module.exports = () => {
 
   router.post('/group', groups.create)
   router.get('/groups', groups.get)
+
+  router.post('/venture', ventures.create)
 
   /*
   SUCCESS & ERROR HANDLER
