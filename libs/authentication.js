@@ -35,7 +35,7 @@ function checkToken(req, res, next) {
 
 function signToken(user, expiresIn = null) {
   const { _id, phone, verified, firstName, lastName } = user
-  user = Object.assign({}, { _id, phone, verified, firstName, lastName })
+  user = { _id, phone, verified, firstName, lastName }
 
   if(expiresIn) {
     expiresIn = 3600 * expiresIn

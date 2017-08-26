@@ -9,7 +9,7 @@ function create(req, res, next) {
 
   Group.create({ admin, name, members })
     .then(group => {
-      req.data = Object.assign({}, req.data, { group })
+      req.data = { ...req.data, group }
       next()
     })
     .catch(err => next(err))
@@ -25,7 +25,7 @@ function get(req, res, next) {
     .populate('members', 'firstName lastName phone')
     .exec()
     .then(groups => {
-      req.data = Object.assign({}, req.data, { groups })
+      req.data = { ...req.data, groups }
       next()
     })
     .catch(err => next(err))

@@ -55,8 +55,8 @@ function update(req, res, next) {
     .then(user => updateProps.call(user, req.body))
 
     .then(user => {
-      const response = user ? {user: user.toObject()} : `Verification code sent to user`
-      req.data = Object.assign({}, req.data, response)
+      const response = user ? {user: user.toObject()} : {prompt: `Verification code sent to user`}
+      req.data = { ...req.data, ...response }
       return next()
     })
 

@@ -15,7 +15,7 @@ function create(req, res, next) {
       return Friend.create(props)
     })
     .then(friend => {
-      req.data = Object.assign({}, req.data, { friend })
+      req.data = { ...req.data, friend }
       next()
     })
     .catch(err => next(err))
@@ -28,7 +28,7 @@ function get(req, res, next) {
     .populate('friend', 'firstName lastName phone')
     .exec()
     .then(friends => {
-      req.data = Object.assign({}, req.data, { friends })
+      req.data = { ...req.data, friends }
       next()
     })
     .catch(err => next(err))
