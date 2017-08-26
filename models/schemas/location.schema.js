@@ -13,6 +13,6 @@ const LocationSchema = {
 }
 
 module.exports = new mongoose.Schema(
-  VentureSchema,
+  LocationSchema,
   schemaOption('_id', 'versionKey')
 )

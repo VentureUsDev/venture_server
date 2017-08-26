@@ -36,4 +36,4 @@ e. send winner venue via sockets
 f. if no date, prompt review after certain period of time,
 g. if date, prompt review after the date,
 
-/*
+*/
