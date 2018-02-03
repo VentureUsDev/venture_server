@@ -20,23 +20,18 @@ function create(req, res, next) {
       const options = await algorithm.pickOptions(businesses)
       // create venues
       const venues = await Venue.batchCreate(options)
-      console.log('venues', venues)
       // create venture with venue ids as options
       let venture = new Venture({
         group,
         category: CATEGORIES[category],
         date: date || new Date(),
-        options: venues.map(venue => venue.id)
+        options: venues.map(venue => venue._id)
       })
 
-      try {
-        venture = await venture.save()
-      } catch(e) {
-        return next(e)
-      }
-
-      // return success message
-      res.data = { ...req.data, venture }
+      return venture.save()
+    })
+    .then(venture => {
+      req.data = {...req.data, venture}
       return next()
     })
     .catch(err => next(err))

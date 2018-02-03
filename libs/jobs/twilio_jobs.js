@@ -2,7 +2,7 @@
 const { sendText } = require('../twilio')
 const { APPNAME } = require('../../config')
 
-module.exports = (agenda) => {
+module.exports = agenda => {
 
   agenda.define('send_verification', (job, done) => {
     const config = job.attrs.data
