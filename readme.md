@@ -99,3 +99,15 @@ npm run debug
 
 #### `GET` `/groups` `x-access-token` header required
 * will get all of the groups that the current user has created or is a member of
+
+### Venture
+
+#### `POST` `/venture` `x-access-token` header required
+* will create a venture with recommended venue options
+
+|Body|Required|Type|Example|Notes|
+|-----|-----|-----|-----|-----|
+|`group`|false|String|`xbglnsdkglkjlkewjlfkwejlk`|group id|
+|`category`|true|String|`bars`|venue search category|
+|`location`|true|Object|`{zip: 90034}`|can be zip, or include `longitude` and `longitude`|
+| `date`   |false|String|`05/19/18 Timestamp` |can be included if the venture is in the future|
