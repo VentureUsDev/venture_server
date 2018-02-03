@@ -8,6 +8,7 @@ const VenueSchema = {
   name     : {type: String, required: true, maxlength: 128},
   yelpId   : {type: String, maxlength: 64},
   phone    : {type: String, maxlength: 16},
+  imageUrl : {type: String, maxlength: 128},
   location : Location,
 }
 
