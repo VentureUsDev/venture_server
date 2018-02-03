@@ -5,4 +5,13 @@ const GOAL_TYPES = {
 
 const JOB_SCHEDULE = {}
 
-module.exports = { GOAL_TYPES, JOB_SCHEDULE }
+const CATEGORIES = {
+  bars: 1,
+  restauratns: 2,
+}
+
+module.exports = {
+  CATEGORIES,
+  GOAL_TYPES,
+  JOB_SCHEDULE,
+}
